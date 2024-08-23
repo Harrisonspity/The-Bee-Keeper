@@ -31,12 +31,12 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">{zip}</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
+          - <ThemedText type="defaultSemiBold">Put Zip Code here</ThemedText> 
+          {' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
           </ThemedText>{' '}
-          to open developer tools.
+        to see weather
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
