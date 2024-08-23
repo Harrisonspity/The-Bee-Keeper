@@ -1,12 +1,31 @@
 import { Image, StyleSheet, Platform , TextInput} from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import axios from 'axios';
+import { View } from 'react-native-reanimated/lib/typescript/Animated';
 
 export default function HomeScreen() {
   const [zip, setZip] = useState('12345');
+  
+  useEffect(()=>{
+    axios.get("http://api.weatherapi.com/v1/current.json?key=5811f53d6d4e41fa8f7225002241908&q=43506&aqi=no")
+    .then((response)=>setZip(response.data)).catch((err)=>console.log(err)) 
+  
+  },[]);
+
+  const resderUserCard =({item})=>{
+    return(
+      <View style={styles.card}>
+        <text style={styles.location}>{item.location}</text>
+        <text style={styles.temp_f}>{item.temp_f}</text>
+        <text style={styles.username}>{item.username}</text>
+        <text style={styles.website}>{item.website}</text>
+      </View>
+    )
+  }
   
   return (
     <ParallaxScrollView
