@@ -16,16 +16,7 @@ export default function HomeScreen() {
   
   },[]);
 
-  const resderUserCard =({item})=>{
-    return(
-      <View style={styles.card}>
-        <text style={styles.location}>{item.location}</text>
-        <text style={styles.temp_f}>{item.temp_f}</text>
-        <text style={styles.username}>{item.username}</text>
-        <text style={styles.website}>{item.website}</text>
-      </View>
-    )
-  }
+  
   
   return (
     <ParallaxScrollView
