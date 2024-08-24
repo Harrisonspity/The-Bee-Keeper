@@ -8,15 +8,52 @@ import axios from 'axios';
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 
 export default function HomeScreen() {
-  const [zip, setZip] = useState('12345');
-  
-  useEffect(()=>{
-    axios.get("http://api.weatherapi.com/v1/current.json?key=5811f53d6d4e41fa8f7225002241908&q=43506&aqi=no")
-    .then((response)=>setZip(response.data)).catch((err)=>console.log(err)) 
-  
-  },[]);
+  const [zip, setZip] = useState('43506');
+  const [data, setData] = useState('');
+  const [tempResult, setTempResult] = useState('');
+  const API_KEY = '5811f53d6d4e41fa8f7225002241908';
+  const ENDPOINT = 'http://api.weatherapi.com/v1/current.json';
+  // 60 degrees Fahrenheit.
+  // 98.6 way to hot
+ 
+  const LOW_TEMP = '60';
+  const HIGH_TEMP = '90.6';
 
-  
+  useEffect(()=>{
+    let isMounted=true;
+
+    const fetchWeather = async () => {
+      try {
+        const response = await axios.get(`${ENDPOINT}?key=${API_KEY}&q=${zip}&aqi=no`);
+        if (isMounted){
+          setData(response.data);
+          compareTemp(response.data.current.temp_f)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchWeather();
+
+    return () => {
+      isMounted=false;
+    }
+
+  },[zip]);
+
+  const compareTemp = (temp:number|null) => {
+    if (temp !== null) {
+      if (temp < LOW_TEMP) {
+        setTempResult('Too Low');
+      } else if (temp > HIGH_TEMP) {
+        setTempResult('Too High');
+      } else {
+        setTempResult('just right')
+      }
+    }
+  }
+  console.log(data);
   
   return (
     <ParallaxScrollView
@@ -30,16 +67,17 @@ export default function HomeScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome To The Bee Keeper</ThemedText>
         <HelloWave />
+       
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">To see your see if today is a good day to inspect hive enter in zip code</ThemedText>
         <TextInput
-      
+        style={styles.inputDark}
         onChangeText={setZip}
         value={zip}
         placeholder="useless placeholder"
         keyboardType="numeric"
       />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">{zip}</ThemedText>
         <ThemedText>
           - <ThemedText type="defaultSemiBold">Put Zip Code here</ThemedText> 
           {' '}
@@ -49,12 +87,15 @@ export default function HomeScreen() {
         to see weather
         </ThemedText>
       </ThemedView>
+      {data ?
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
+      <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
+      <ThemedText>
+        tempiture={data.current.temp_f} / {tempResult}
+      </ThemedText>
+    </ThemedView>
+    : null}
+      
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
         <ThemedText>
@@ -86,4 +127,12 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+  inputDark: {
+    color: '#ffffff',
+    borderWidth: 3,
+    borderColor: '#ffffff',
+    paddingHorizontal:10,
+    paddingVertical:5,
+    backgroundColor: '#333333'
+  }
 });
