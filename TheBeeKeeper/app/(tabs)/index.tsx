@@ -145,11 +145,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
+    height: 250,
+    width: 395,
     bottom: 0,
     left: 0,
-    position: 'absolute',
   },
   inputDark: {
     color: '#ffffff',
