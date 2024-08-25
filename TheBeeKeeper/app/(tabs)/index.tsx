@@ -11,6 +11,7 @@ export default function HomeScreen() {
   const [zip, setZip] = useState('43506');
   const [data, setData] = useState('');
   const [tempResult, setTempResult] = useState('');
+  const [windResult, setWindResult] = useState('');
   const API_KEY = '5811f53d6d4e41fa8f7225002241908';
   const ENDPOINT = 'http://api.weatherapi.com/v1/current.json';
   // 60 degrees Fahrenheit.
@@ -18,6 +19,8 @@ export default function HomeScreen() {
  
   const LOW_TEMP = '60';
   const HIGH_TEMP = '90.6';
+const HIGH_WIND = '15';
+const WARNING_WIND = '2.25';
 
   useEffect(()=>{
     let isMounted=true;
@@ -28,6 +31,7 @@ export default function HomeScreen() {
         if (isMounted){
           setData(response.data);
           compareTemp(response.data.current.temp_f)
+          compareWind(response.data.current.wind_mph)
         }
       } catch (error) {
         console.error(error);
@@ -53,6 +57,17 @@ export default function HomeScreen() {
       }
     }
   }
+  const compareWind = (wind:number|null) => {
+    if (wind !== null) {
+      if (wind > HIGH_WIND) {
+        setWindResult('Too Windy');
+      } else if (wind > WARNING_WIND) {
+        setWindResult('May be windy');
+      } else {
+        setWindResult('just right')
+      }
+    }
+  }
   console.log(data);
   
   return (
@@ -60,7 +75,7 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require('@/assets/images/HeadingImage.png')}
           style={styles.reactLogo}
         />
       }>
@@ -88,12 +103,21 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       {data ?
+      <>
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
+     
       <ThemedText>
         tempiture={data.current.temp_f} / {tempResult}
       </ThemedText>
     </ThemedView>
+    <ThemedView style={styles.stepContainer}>
+    
+    <ThemedText>
+      Wind={data.current.wind_mph} / {windResult}
+    </ThemedText>
+  </ThemedView>
+  </>
     : null}
       
       <ThemedView style={styles.stepContainer}>
