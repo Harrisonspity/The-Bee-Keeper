@@ -10,7 +10,7 @@ import { ThemedView } from '@/components/ThemedView';
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: '#f2d469', dark: '#f2d469' }}
       headerImage={
         <Image
           source={require('@/assets/images/Heading2.png')}
