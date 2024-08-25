@@ -16,7 +16,7 @@ export default function TabTwoScreen() {
         <ThemedText type="title">When should you inspect your bees?</ThemedText>
       </ThemedView>
       <ThemedText>These are some important questions that people ask..</ThemedText>
-      <Collapsible title="What tempiture is to hot to inspect my bees?">
+      <Collapsible title="What temperature is to hot to inspect my bees?">
         <ThemedText>
         inspection during the heat of the day, you can't leave combs out in the hot sun (90+ degrees) or they can begin to melt, and working a hive in very hot temperatures in the full sun is very uncomfortable for you and the bees.{' '}
           <ThemedText type="defaultSemiBold"></ThemedText> {' '}
@@ -30,32 +30,32 @@ export default function TabTwoScreen() {
           <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
+      <Collapsible title="What temperature is to cold for bees?">
         <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
+        If the relative temperature around the hive is at least 50℉, you are safe to open it up and scope out your ladies. However, if it's any colder than that, you will need to limit your visit to an external-only inspection.{' '}
+          <ThemedText type="defaultSemiBold"></ThemedText> 
         </ThemedText>
       </Collapsible>
-      <Collapsible title="Images">
+      <Collapsible title="When is it to windy for inspections?">
         <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
+        Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any wind speed above that is too much. Even then, you may carry out a beehive inspection in faster wind up to a limit. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
+          <ThemedText type="defaultSemiBold"></ThemedText> 
+          
         </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
+        
         <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
+          <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Custom fonts">
+      <Collapsible title="Is it ok for it to be raining while im inspecting my hive?">
         <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
+         Inspecting hives on a rainy day is a big beekeeping no-no. Why? Well, bees keep a very controlled environment in their hives. Their homes are climate controlled down to the degree, and they're not fans of their space being sullied. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
           <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
+            
           </ThemedText>
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
+        <ExternalLink href="">
+          <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
       <Collapsible title="Light and dark mode components">

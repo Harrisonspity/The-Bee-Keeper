@@ -70,7 +70,7 @@ export default function HomeScreen() {
        
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">To see your see if today is a good day to inspect hive enter in zip code</ThemedText>
+        <ThemedText type="subtitle">To see if today is a good day to inspect hive enter in zip code</ThemedText>
         <TextInput
         style={styles.inputDark}
         onChangeText={setZip}
@@ -79,12 +79,12 @@ export default function HomeScreen() {
         keyboardType="numeric"
       />
         <ThemedText>
-          - <ThemedText type="defaultSemiBold">Put Zip Code here</ThemedText> 
+          - <ThemedText type="defaultSemiBold"></ThemedText> 
           {' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
           </ThemedText>{' '}
-        to see weather
+        Weather will show below
         </ThemedText>
       </ThemedView>
       {data ?
