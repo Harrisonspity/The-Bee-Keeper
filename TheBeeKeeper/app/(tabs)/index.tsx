@@ -106,7 +106,7 @@ const WARNING_WIND = '2.25';
       <>
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
-     
+      <ThemedText type="subtitle">Current Weather- {data.current.condition.text} <Image source='{data.current.condition.icon}'></Image> </ThemedText>
       <ThemedText>
         tempiture={data.current.temp_f} / {tempResult}
       </ThemedText>
