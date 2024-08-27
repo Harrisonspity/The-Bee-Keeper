@@ -21,6 +21,7 @@ export default function HomeScreen() {
   const HIGH_TEMP = '90.6';
 const HIGH_WIND = '15';
 const WARNING_WIND = '2.25';
+const HIGH_RAIN = '0.0';
 
   useEffect(()=>{
     let isMounted=true;
@@ -106,7 +107,9 @@ const WARNING_WIND = '2.25';
       <>
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
-      <ThemedText type="subtitle">Current Weather- {data.current.condition.text} <Image source='{data.current.condition.icon}'></Image> </ThemedText>
+      <ThemedText type="subtitle">Current Weather- {data.current.condition.text}  </ThemedText>
+      <Image style={styles.icon} source={{ uri: 'https:'+data.current.condition.icon}} />
+      <ThemedText type="subtitle">Current rain- {data.current.precip_in}</ThemedText>
       <ThemedText>
         tempiture={data.current.temp_f} / {tempResult}
       </ThemedText>
@@ -120,16 +123,7 @@ const WARNING_WIND = '2.25';
   </>
     : null}
       
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
+      
     </ParallaxScrollView>
   );
 }
@@ -149,6 +143,11 @@ const styles = StyleSheet.create({
     width: 395,
     bottom: 0,
     left: 0,
+  },
+  icon: {
+    height: 40,
+    width: 40,
+    position: 'relative'
   },
   inputDark: {
     color: '#ffffff',

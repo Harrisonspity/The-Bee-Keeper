@@ -7,7 +7,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
-export default function TabTwoScreen() {
+export default function TabThreeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#f2d469', dark: '#f2d469' }}
@@ -63,22 +63,21 @@ export default function TabTwoScreen() {
           <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Light and dark mode components">
+      <Collapsible title="Is it ok for me to inspect my hive during night?">
         <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
+        The middle of the day is the best time to go into the bee hive. The forager bees will be out collecting nectar and pollen, meaning that there will be fewer bees in the hive. If you check the hive early in the morning or at night, there will be many more bees in there.{' '}
+          <ThemedText type="defaultSemiBold"></ThemedText> 
         </ThemedText>
         <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
+          <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Animations">
+      <Collapsible title="Is ok to inpcet my hive during winter?">
         <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
+        I always encourage beekeepers to check their hives at least 1 time per month during the winter. Here are some parameters around when to inspect: Inspections lasting less than 1 minute, breaking boxes apart and feeding or looking at the cluster, but not pulling out frames- Make sure the temperature is above 32 degrees.{' '}
+          <ThemedText type="defaultSemiBold"></ThemedText> 
+           <ThemedText type="defaultSemiBold"></ThemedText> 
+          
         </ThemedText>
         {Platform.select({
           ios: (

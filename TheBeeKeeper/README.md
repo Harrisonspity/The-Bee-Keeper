@@ -9,3 +9,4 @@ Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any
 By and large, however, inspecting hives on a rainy day is a big beekeeping no-no. Why? Well, bees keep a very controlled environment in their hives. Their homes are climate controlled down to the degree, and they're not fans of their space being sullied.
 40-50 lbs. for 10 box full of honey
 Therefore, a deep super full of honey can weight close to 70 pounds. A medium close to 50 pounds and a small 30 pounds. We only build and sell medium supers because it is more commonly used by the average beekeeper.
+40 super 70 deep
