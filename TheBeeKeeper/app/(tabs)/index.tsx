@@ -1,17 +1,17 @@
-import { Image, StyleSheet, Platform , TextInput} from 'react-native';
+import { Image, StyleSheet, Platform, View, TextInput} from 'react-native';
 import { useEffect, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import axios from 'axios';
-import { View } from 'react-native-reanimated/lib/typescript/Animated';
 
 export default function HomeScreen() {
-  const [zip, setZip] = useState('43506');
+  const [zip, setZip] = useState('');
   const [data, setData] = useState('');
   const [tempResult, setTempResult] = useState('');
   const [windResult, setWindResult] = useState('');
+  const [rainResult, setRainResult] = useState('');
   const API_KEY = '5811f53d6d4e41fa8f7225002241908';
   const ENDPOINT = 'http://api.weatherapi.com/v1/current.json';
   // 60 degrees Fahrenheit.
@@ -19,9 +19,9 @@ export default function HomeScreen() {
  
   const LOW_TEMP = '60';
   const HIGH_TEMP = '90.6';
-const HIGH_WIND = '15';
-const WARNING_WIND = '2.25';
-const HIGH_RAIN = '0.0';
+  const HIGH_WIND = '15';
+  const WARNING_WIND = '2.25';
+  const HIGH_RAIN = '0.0';
 
   useEffect(()=>{
     let isMounted=true;
@@ -58,8 +58,31 @@ const HIGH_RAIN = '0.0';
       }
     }
   }
+  const compareRain = (rain:number|null) => {
+    if (temp !== null) {
+      if (temp < LOW_TEMP) {
+        setTempResult('Too Low');
+      } else if (temp > HIGH_TEMP) {
+        setTempResult('Too High');
+      } else {
+        setTempResult('just right')
+      }
+    }
+  }
   const compareWind = (wind:number|null) => {
     if (wind !== null) {
+      if (wind > HIGH_WIND) {
+        setWindResult('Too Windy');
+      } else if (wind > WARNING_WIND) {
+        setWindResult('May be windy');
+      } else {
+        setWindResult('just right')
+      }
+    }
+  }
+
+  const inspectResult = (windResult, rain, tempResult) => {
+    if (wind !== null && rain !== null && temp !== null) {
       if (wind > HIGH_WIND) {
         setWindResult('Too Windy');
       } else if (wind > WARNING_WIND) {
@@ -86,39 +109,38 @@ const HIGH_RAIN = '0.0';
        
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">To see if today is a good day to inspect hive enter in zip code</ThemedText>
+        <ThemedText type="subtitle">Step 1-Enter in your zip code</ThemedText>
         <TextInput
         style={styles.inputDark}
         onChangeText={setZip}
         value={zip}
-        placeholder="useless placeholder"
+        placeholder="Put in zip code"
         keyboardType="numeric"
       />
         <ThemedText>
-          - <ThemedText type="defaultSemiBold"></ThemedText> 
-          {' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-        Weather will show below
+        Your zip code will determine if it is safe to inspect your hives
         </ThemedText>
       </ThemedView>
       {data ?
       <>
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
-      <ThemedText type="subtitle">Current Weather- {data.current.condition.text}  </ThemedText>
+      <View>
+        
+      </View>
+      <ThemedText type="defaultSemiBold">{data.current.condition.text}  </ThemedText>
       <Image style={styles.icon} source={{ uri: 'https:'+data.current.condition.icon}} />
-      <ThemedText type="subtitle">Current rain- {data.current.precip_in}</ThemedText>
-      <ThemedText>
-        tempiture={data.current.temp_f} / {tempResult}
+      <ThemedText type="defaultSemiBold">{data.current.precip_in} inches of rain per hour</ThemedText>
+      <ThemedText type="defaultSemiBold">
+        {data.current.temp_f} degrees outside / {tempResult}
+      </ThemedText>
+      <ThemedText type="defaultSemiBold">
+        {data.current.wind_mph} MPH Windshield / {windResult}
       </ThemedText>
     </ThemedView>
     <ThemedView style={styles.stepContainer}>
     
-    <ThemedText>
-      Wind={data.current.wind_mph} / {windResult}
-    </ThemedText>
+    
   </ThemedView>
   </>
     : null}
