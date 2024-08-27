@@ -31,28 +31,32 @@ export default function TabTwoScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Measure</ThemedText>
       </ThemedView>
+      <Image
+          source={require('@/assets/images/SupersDeeps.png')}
+          style={styles.measure}
+        />
       <ThemedText>
-        Put in amout of full supers \/
+        Put in the amout of supers full of honey \/
       </ThemedText>
       <TextInput
         style={styles.inputDark}
         onChangeText={setSkinny}
         value={skinny}
-        placeholder="Put in Super"
+        placeholder="Super count"
         keyboardType="numeric"
       />
       <ThemedText>
-        Put in amout of full deeps \/
+        Put in the amout of deeps full of honey \/
       </ThemedText>
             <TextInput
         style={styles.inputDark}
         onChangeText={setDeep}
         value={deep}
-        placeholder="Put in Deep"
+        placeholder="Deep count"
         keyboardType="numeric"
       />
       <ThemedText>
-        Below will show the estimated amout of honey you harvested in pounds
+        Below will show the estimated amout of honey you will harvest in pounds
       </ThemedText>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Amount of Honey: {total} {total ? 'lbs.' : null}</ThemedText>
@@ -77,6 +81,9 @@ const styles = StyleSheet.create({
     width: 395,
     bottom: 0,
     left: 0,
+  },
+  measure: {
+    
   },
   icon: {
     height: 40,
