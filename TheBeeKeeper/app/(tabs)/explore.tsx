@@ -20,10 +20,10 @@ export default function TabThreeScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">When should you inspect your bees?</ThemedText>
       </ThemedView>
-      <ThemedText>These are some important questions that people ask..</ThemedText>
-      <Collapsible title="What temperature is to hot to inspect my bees?">
+      <ThemedText>These are some important questions that people may ask..</ThemedText>
+      <Collapsible title="What temperature is too hot for inspecting my bees?">
         <ThemedText>
-        inspection during the heat of the day, you can't leave combs out in the hot sun (90+ degrees) or they can begin to melt, and working a hive in very hot temperatures in the full sun is very uncomfortable for you and the bees.{' '}
+        Inspection during the heat of the day, You can't leave combs out in the hot sun (90+ degrees) or they can begin to melt, and working a hive in very hot temperatures in the full sun is very uncomfortable for you and the bees.{' '}
           <ThemedText type="defaultSemiBold"></ThemedText> {' '}
           <ThemedText type="defaultSemiBold"></ThemedText>
         </ThemedText>
@@ -43,7 +43,7 @@ export default function TabThreeScreen() {
       </Collapsible>
       <Collapsible title="When is it to windy for inspections?">
         <ThemedText>
-        Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any wind speed above that is too much. Even then, you may carry out a beehive inspection in faster wind up to a limit. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
+        Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any wind speed above that is too much. Even then, you may carry out a beehive inspection in faster winds up to a limit. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
           <ThemedText type="defaultSemiBold"></ThemedText> 
           
         </ThemedText>
