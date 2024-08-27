@@ -59,13 +59,11 @@ export default function HomeScreen() {
     }
   }
   const compareRain = (rain:number|null) => {
-    if (temp !== null) {
-      if (temp < LOW_TEMP) {
-        setTempResult('Too Low');
-      } else if (temp > HIGH_TEMP) {
-        setTempResult('Too High');
+    if (rain !== null) {
+      if (rain > HIGH_RAIN) {
+        setRainResult('Too High');
       } else {
-        setTempResult('just right')
+        setRainResult('Just Right')
       }
     }
   }
