@@ -35,13 +35,13 @@ export default function TabThreeScreen() {
           <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="What temperature is to cold for bees?">
+      <Collapsible title="What temperature is too cold for bees?">
         <ThemedText>
         If the relative temperature around the hive is at least 50℉, you are safe to open it up and scope out your ladies. However, if it's any colder than that, you will need to limit your visit to an external-only inspection.{' '}
           <ThemedText type="defaultSemiBold"></ThemedText> 
         </ThemedText>
       </Collapsible>
-      <Collapsible title="When is it to windy for inspections?">
+      <Collapsible title="When is it too windy for inspections?">
         <ThemedText>
         Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any wind speed above that is too much. Even then, you may carry out a beehive inspection in faster winds up to a limit. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
           <ThemedText type="defaultSemiBold"></ThemedText> 
@@ -52,7 +52,7 @@ export default function TabThreeScreen() {
           <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Is it ok for it to be raining while im inspecting my hive?">
+      <Collapsible title="Is it ok for it to be raining while I'm inspecting my hive?">
         <ThemedText>
          Inspecting hives on a rainy day is a big beekeeping no-no. Why? Well, bees keep a very controlled environment in their hives. Their homes are climate controlled down to the degree, and they're not fans of their space being sullied. <ThemedText type="defaultSemiBold"></ThemedText> {' '}
           <ThemedText style={{ fontFamily: 'SpaceMono' }}>
@@ -72,7 +72,7 @@ export default function TabThreeScreen() {
           <ThemedText type="link"></ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Is ok to inpcet my hive during winter?">
+      <Collapsible title="Is ok to inpcet my hive during the winter?">
         <ThemedText>
         I always encourage beekeepers to check their hives at least 1 time per month during the winter. Here are some parameters around when to inspect: Inspections lasting less than 1 minute, breaking boxes apart and feeding or looking at the cluster, but not pulling out frames- Make sure the temperature is above 32 degrees.{' '}
           <ThemedText type="defaultSemiBold"></ThemedText> 
