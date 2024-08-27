@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, TextInput} from 'react-native';
+import { Image, StyleSheet, Platform, View, Text, TextInput} from 'react-native';
 import { useEffect, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -12,6 +12,7 @@ export default function HomeScreen() {
   const [tempResult, setTempResult] = useState('');
   const [windResult, setWindResult] = useState('');
   const [rainResult, setRainResult] = useState('');
+  const [inspection, setInspection] = useState('');
   const API_KEY = '5811f53d6d4e41fa8f7225002241908';
   const ENDPOINT = 'http://api.weatherapi.com/v1/current.json';
   // 60 degrees Fahrenheit.
@@ -33,6 +34,8 @@ export default function HomeScreen() {
           setData(response.data);
           compareTemp(response.data.current.temp_f)
           compareWind(response.data.current.wind_mph)
+          compareRain(response.data.current.precip_in)
+          inspectResult(response.data.current.wind_mph,response.data.current.precip_in,response.data.current.temp_f)
         }
       } catch (error) {
         console.error(error);
@@ -79,14 +82,14 @@ export default function HomeScreen() {
     }
   }
 
-  const inspectResult = (windResult, rain, tempResult) => {
+  const inspectResult = (wind, rain, temp) => {
     if (wind !== null && rain !== null && temp !== null) {
-      if (wind > HIGH_WIND) {
-        setWindResult('Too Windy');
+      if (wind > HIGH_WIND || rain > HIGH_RAIN || temp > HIGH_TEMP || temp < LOW_TEMP) {
+        setInspection('Red');
       } else if (wind > WARNING_WIND) {
-        setWindResult('May be windy');
+        setInspection('Yellow');
       } else {
-        setWindResult('just right')
+        setInspection('Green');
       }
     }
   }
@@ -124,7 +127,21 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
       <View>
-        
+        {inspection==='Red' ?
+        <View style={styles.red}>
+          <Text style={styles.font}>Do Not Inspect</Text>
+        </View>
+        : null }
+        {inspection==='Yellow' ?
+        <View style={styles.yellow}>
+          <Text style={styles.font}>Inspection Risky</Text>
+        </View>
+        : null }
+        {inspection==='Green' ?
+        <View style={styles.green}>
+          <Text style={styles.font}>Safe To Inspect</Text>
+        </View>
+        : null }
       </View>
       <ThemedText type="defaultSemiBold">{data.current.condition.text}  </ThemedText>
       <Image style={styles.icon} source={{ uri: 'https:'+data.current.condition.icon}} />
@@ -158,11 +175,44 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 8,
   },
+  red: {
+    borderRadius: 100,
+    width: 150,
+    height: 150,
+    backgroundColor: 'red',
+    padding: 10,
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  yellow: {
+    borderRadius: 100,
+    width: 150,
+    height: 150,
+    backgroundColor: 'yellow',
+    padding: 10,
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  green: {
+    borderRadius: 100,
+    width: 150,
+    height: 150,
+    backgroundColor: 'green',
+    padding: 10,
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   reactLogo: {
     height: 250,
     width: 395,
     bottom: 0,
     left: 0,
+  },
+  font: {
+fontWeight: 900
   },
   icon: {
     height: 40,
