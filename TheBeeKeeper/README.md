@@ -1,12 +1,80 @@
-5811f53d6d4e41fa8f7225002241908
-http://api.weatherapi.com/v1/current.json?key=5811f53d6d4e41fa8f7225002241908&q=43506&aqi=no
-Timing and Weather Considerations It is ideal to conduct beehive inspections on moderately warm and dry days, with temperatures above 60 degrees Fahrenheit.
-98.6 way to hot
-However, keep in mind, if you do an inspection during the heat of the day, you can't leave combs out in the hot sun (90+ degrees) or they can begin to melt, and working a hive in very hot temperatures in the full sun is very uncomfortable for you and the bees.
-2.25 warnig may be to windy above this
-Bees fly at a speed of about 15 MPH (24.14 KPH). As a general rule of thumb, any wind speed above that is too much. Even then, you may carry out a beehive inspection in faster wind up to a limit.
-0 inches per hour is good
-By and large, however, inspecting hives on a rainy day is a big beekeeping no-no. Why? Well, bees keep a very controlled environment in their hives. Their homes are climate controlled down to the degree, and they're not fans of their space being sullied.
-40-50 lbs. for 10 box full of honey
-Therefore, a deep super full of honey can weight close to 70 pounds. A medium close to 50 pounds and a small 30 pounds. We only build and sell medium supers because it is more commonly used by the average beekeeper.
-40 super 70 deep
+# The Beekeeper App
+
+## Introduction
+
+The Beekeeping Weather Guide App is an essential tool designed to assist beekeepers in determining the optimal conditions for inspecting and managing their beehives. Built by Harrison and Luke Spitnale for the Congressional App Challenge, this app provides real-time weather data tailored to the needs of beekeepers, helping them make informed decisions on when and how to conduct hive inspections.
+
+The app leverages live weather data to provide recommendations on temperature, wind speed, and rainfall, ensuring that inspections are conducted under the best possible conditions. By using this app, beekeepers can avoid potentially harmful situations, such as overheating or exposing their hives to unfavorable conditions.
+
+## Features
+
+- **Real-Time Weather Data**: Access current weather information for your location, including temperature, wind speed, and rainfall.
+- **Inspection Recommendations**: Receive advice on the best times to inspect your hives based on weather conditions.
+- **Beekeeping Tips**: Learn key considerations for maintaining hive health in various weather scenarios.
+
+## Installation
+
+To install and run the Beekeeping Weather Guide App locally, follow these steps:
+
+1. Clone the repository to your local machine:
+    ```bash
+    git clone https://github.com/Harrisonspity/The-Bee-Keeper.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd the-beekeeper-app
+    ```
+
+3. Install the required dependencies:
+    ```bash
+    npm install
+    ```
+
+4. Install Expo CLI globally if you haven't already:
+    ```bash
+    npm install -g expo-cli
+    ```
+
+5. Run the app:
+    ```bash
+    expo start
+    ```
+
+## Running the App on Simulators
+
+### iOS Simulator
+
+1. Ensure you have Xcode installed on your macOS system.
+2. Open Xcode and navigate to **Preferences > Locations**, then set the command line tools.
+3. Run the iOS simulator from the Expo CLI:
+    ```bash
+    expo start --ios
+    ```
+
+### Android Emulator
+
+1. Install Android Studio and set up an Android Virtual Device (AVD).
+2. Ensure that the AVD is running.
+3. Run the Android emulator from the Expo CLI:
+    ```bash
+    expo start --android
+    ```
+
+### Web
+
+To run the app in a web browser, use the following command:
+```bash
+expo start --web
+
+## Usage
+
+Once the app is running, enter your location to retrieve weather data and receive tailored beekeeping recommendations. Use the provided tips to guide your beehive inspections and ensure the health and productivity of your colonies.
+
+## About the Congressional App Challenge
+
+The Congressional App Challenge (CAC) is an annual competition that encourages students to create and submit original apps. Winning apps are recognized by U.S. Representatives and may be displayed in the U.S. Capitol Building for one year. The competition aims to inspire innovation and creativity in coding among young students.
+
+---
+
+Developed by Harrison and Luke Spitnale for the Congressional App Challenge.
