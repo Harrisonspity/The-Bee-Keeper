@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, Text, TextInput} from 'react-native';
+import {Image, StyleSheet, Platform, View, Text, TextInput, useColorScheme} from 'react-native';
 import { useEffect, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -9,6 +9,7 @@ import axios from 'axios';
 export default function HomeScreen() {
   const [zip, setZip] = useState('');
   const [data, setData] = useState('');
+  const isDarkMode = useColorScheme() === 'dark';
   const [tempResult, setTempResult] = useState('');
   const [windResult, setWindResult] = useState('');
   const [rainResult, setRainResult] = useState('');
@@ -42,7 +43,9 @@ export default function HomeScreen() {
       }
     }
 
-    fetchWeather();
+    if (zip.length === 5) {
+      fetchWeather();
+    }
 
     return () => {
       isMounted=false;
@@ -112,12 +115,13 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1-Enter in your zip code</ThemedText>
         <TextInput
-        style={styles.inputDark}
-        onChangeText={setZip}
-        value={zip}
-        placeholder="Put in zip code"
-        keyboardType="numeric"
-      />
+            style={isDarkMode ? styles.inputDark : styles.inputLight}
+            onChangeText={setZip}
+            value={zip}
+            placeholder="Put in zip code"
+            keyboardType="numeric"
+            placeholderTextColor={isDarkMode ? 'lightgray' : 'darkgray'}
+        />
         <ThemedText>
         Your zip code will determine if it is safe to inspect your hives
         </ThemedText>
@@ -226,5 +230,13 @@ fontWeight: 900
     paddingHorizontal:10,
     paddingVertical:5,
     backgroundColor: '#333333'
+  },
+  inputLight: {
+    color: '#000',
+    borderWidth: 3,
+    borderColor: '#eee',
+    paddingHorizontal:10,
+    paddingVertical:5,
+    backgroundColor: '#ffffff'
   }
 });

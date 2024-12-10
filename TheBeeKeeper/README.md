@@ -8,14 +8,7 @@ The app leverages live weather data to provide recommendations on temperature, w
 
 ## Features
 
-- **Real-Time Weather Data**: Access current weather information for your location, including temperature, wind speed, and rainfall.
-- **Inspection Recommendations**: Receive advice on the best times to inspect your hives based on weather conditions.
-- **Beekeeping Tips**: Learn key considerations for maintaining hive health in various weather scenarios.
-
-## Installation
-
-To install and run the Beekeeping Weather Guide App locally, follow these steps:
-
+7801
 1. Clone the repository to your local machine:
     ```bash
     git clone https://github.com/Harrisonspity/The-Bee-Keeper.git

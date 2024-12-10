@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform , TextInput} from 'react-native';
+import {Image, StyleSheet, Platform, TextInput, useColorScheme} from 'react-native';
 import { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -9,7 +9,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function TabTwoScreen() {
-  //
+  const isDarkMode = useColorScheme() === 'dark';
   const [skinny, setSkinny] = useState('');
   const [deep, setDeep] = useState('');
   const [total, setTotal] = useState('0');
@@ -39,7 +39,7 @@ export default function TabTwoScreen() {
         Put in the amout of supers full of honey \/
       </ThemedText>
       <TextInput
-        style={styles.inputDark}
+          style={isDarkMode ? styles.inputDark : styles.inputLight}
         onChangeText={setSkinny}
         value={skinny}
         placeholder="Super count"
@@ -48,8 +48,8 @@ export default function TabTwoScreen() {
       <ThemedText>
         Put in the amout of deeps full of honey \/
       </ThemedText>
-            <TextInput
-        style={styles.inputDark}
+        <TextInput
+        style={isDarkMode ? styles.inputDark : styles.inputLight}
         onChangeText={setDeep}
         value={deep}
         placeholder="Deep count"
@@ -97,5 +97,13 @@ const styles = StyleSheet.create({
     paddingHorizontal:10,
     paddingVertical:5,
     backgroundColor: '#333333'
-  }
+  },
+    inputLight: {
+        color: '#000',
+        borderWidth: 3,
+        borderColor: '#eee',
+        paddingHorizontal:10,
+        paddingVertical:5,
+        backgroundColor: '#ffffff'
+    }
 });
