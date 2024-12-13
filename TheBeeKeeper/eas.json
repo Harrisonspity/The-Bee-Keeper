@@ -1,0 +1,45 @@
+{
+  "cli": {
+    "version": ">= 7.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m-medium",
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "channel": "production",
+      "autoIncrement": true,
+      "env": {
+        "API_KEY": "5811f53d6d4e41fa8f7225002241908",
+        "ENDPOINT": "https://api.weatherapi.com/v1/current.json"
+      },
+      "ios": {
+        "resourceClass": "m-medium",
+        "image": "latest",
+        "buildConfiguration": "Release"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "spitnale@gmail.com",
+        "ascAppId": "6739353052",
+        "appleTeamId": "4952X87LGJ"
+      }
+    }
+  }
+}

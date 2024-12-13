@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Platform, View, Text, TextInput, useColorScheme} from 'react-native';
+import {Image, StyleSheet, Platform, View, Text, TextInput, useColorScheme, Keyboard} from 'react-native';
 import { useEffect, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -15,77 +15,89 @@ export default function HomeScreen() {
   const [rainResult, setRainResult] = useState('');
   const [inspection, setInspection] = useState('');
   const API_KEY = '5811f53d6d4e41fa8f7225002241908';
-  const ENDPOINT = 'http://api.weatherapi.com/v1/current.json';
-  // 60 degrees Fahrenheit.
-  // 98.6 way to hot
- 
+  const ENDPOINT = 'https://api.weatherapi.com/v1/current.json';
+  // Minimum temperature: 60°F
+  // Maximum temperature: 90.6°F (too hot)
+
   const LOW_TEMP = '60';
   const HIGH_TEMP = '90.6';
   const HIGH_WIND = '15';
   const WARNING_WIND = '2.25';
   const HIGH_RAIN = '0.0';
 
-  useEffect(()=>{
-    let isMounted=true;
+  const handleZipChange = (text: string) => {
+    // Only allow numbers and max 5 characters
+    const numericValue = text.replace(/[^0-9]/g, '').slice(0, 5);
+    setZip(numericValue);
+
+    // If we've reached 5 digits, dismiss keyboard
+    if (numericValue.length === 5) {
+      Keyboard.dismiss();
+    }
+  };
+
+  useEffect(() => {
+    let isMounted = true;
 
     const fetchWeather = async () => {
       try {
         const response = await axios.get(`${ENDPOINT}?key=${API_KEY}&q=${zip}&aqi=no`);
-        if (isMounted){
+        if (isMounted) {
           setData(response.data);
-          compareTemp(response.data.current.temp_f)
-          compareWind(response.data.current.wind_mph)
-          compareRain(response.data.current.precip_in)
-          inspectResult(response.data.current.wind_mph,response.data.current.precip_in,response.data.current.temp_f)
+          compareTemp(response.data.current.temp_f);
+          compareWind(response.data.current.wind_mph);
+          compareRain(response.data.current.precip_in);
+          inspectResult(response.data.current.wind_mph, response.data.current.precip_in, response.data.current.temp_f);
         }
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     if (zip.length === 5) {
       fetchWeather();
     }
 
     return () => {
-      isMounted=false;
-    }
+      isMounted = false;
+    };
+  }, [zip]);
 
-  },[zip]);
-
-  const compareTemp = (temp:number|null) => {
+  const compareTemp = (temp: number | null) => {
     if (temp !== null) {
       if (temp < LOW_TEMP) {
         setTempResult('Too Low');
       } else if (temp > HIGH_TEMP) {
         setTempResult('Too High');
       } else {
-        setTempResult('just right')
+        setTempResult('Just Right');
       }
     }
-  }
-  const compareRain = (rain:number|null) => {
+  };
+
+  const compareRain = (rain: number | null) => {
     if (rain !== null) {
       if (rain > HIGH_RAIN) {
         setRainResult('Too High');
       } else {
-        setRainResult('Just Right')
+        setRainResult('Just Right');
       }
     }
-  }
-  const compareWind = (wind:number|null) => {
+  };
+
+  const compareWind = (wind: number | null) => {
     if (wind !== null) {
       if (wind > HIGH_WIND) {
         setWindResult('Too Windy');
       } else if (wind > WARNING_WIND) {
-        setWindResult('May be windy');
+        setWindResult('May Be Windy');
       } else {
-        setWindResult('just right')
+        setWindResult('Just Right');
       }
     }
-  }
+  };
 
-  const inspectResult = (wind, rain, temp) => {
+  const inspectResult = (wind: number, rain: number, temp: number) => {
     if (wind !== null && rain !== null && temp !== null) {
       if (wind > HIGH_WIND || rain > HIGH_RAIN || temp > HIGH_TEMP || temp < LOW_TEMP) {
         setInspection('Red');
@@ -95,77 +107,72 @@ export default function HomeScreen() {
         setInspection('Green');
       }
     }
-  }
-  console.log(data);
-  
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#f2d469', dark: '#f2d469' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/HeadingImage.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome To The Bee Keeper</ThemedText>
-        <HelloWave />
-       
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1-Enter in your zip code</ThemedText>
-        <TextInput
-            style={isDarkMode ? styles.inputDark : styles.inputLight}
-            onChangeText={setZip}
-            value={zip}
-            placeholder="Put in zip code"
-            keyboardType="numeric"
-            placeholderTextColor={isDarkMode ? 'lightgray' : 'darkgray'}
-        />
-        <ThemedText>
-        Your zip code will determine if it is safe to inspect your hives
-        </ThemedText>
-      </ThemedView>
-      {data ?
-      <>
-      <ThemedView style={styles.stepContainer}>
-      <ThemedText type="subtitle">Current Location {data.location.name} {data.location.region}</ThemedText>
-      <View>
-        {inspection==='Red' ?
-        <View style={styles.red}>
-          <Text style={styles.font}>Do Not Inspect</Text>
-        </View>
-        : null }
-        {inspection==='Yellow' ?
-        <View style={styles.yellow}>
-          <Text style={styles.font}>Inspection Risky</Text>
-        </View>
-        : null }
-        {inspection==='Green' ?
-        <View style={styles.green}>
-          <Text style={styles.font}>Safe To Inspect</Text>
-        </View>
-        : null }
-      </View>
-      <ThemedText type="defaultSemiBold">{data.current.condition.text}  </ThemedText>
-      <Image style={styles.icon} source={{ uri: 'https:'+data.current.condition.icon}} />
-      <ThemedText type="defaultSemiBold">{data.current.precip_in} inches of rain per hour</ThemedText>
-      <ThemedText type="defaultSemiBold">
-        {data.current.temp_f} degrees outside / {tempResult}
-      </ThemedText>
-      <ThemedText type="defaultSemiBold">
-        {data.current.wind_mph} MPH Windshield / {windResult}
-      </ThemedText>
-    </ThemedView>
-    <ThemedView style={styles.stepContainer}>
-    
-    
-  </ThemedView>
-  </>
-    : null}
-      
-      
-    </ParallaxScrollView>
+      <ParallaxScrollView
+          headerBackgroundColor={{ light: '#f2d469', dark: '#f2d469' }}
+          headerImage={
+            <Image
+                source={require('@/assets/images/HeadingImage.png')}
+                style={styles.reactLogo}
+            />
+          }>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Welcome to The Beekeeper</ThemedText>
+          <HelloWave />
+        </ThemedView>
+        <ThemedView style={styles.stepContainer}>
+          <ThemedText type="subtitle">Step 1 - Enter your ZIP code</ThemedText>
+          <TextInput
+              style={isDarkMode ? styles.inputDark : styles.inputLight}
+              onChangeText={handleZipChange}
+              value={zip}
+              placeholder="Enter ZIP code"
+              keyboardType="numeric"
+              maxLength={5}
+              placeholderTextColor={isDarkMode ? 'lightgray' : 'darkgray'}
+              returnKeyType="done"
+              onSubmitEditing={Keyboard.dismiss}
+          />
+          <ThemedText>
+            Your ZIP code will determine if it is safe to inspect your hives
+          </ThemedText>
+        </ThemedView>
+        {data ? (
+            <>
+              <ThemedView style={styles.stepContainer}>
+                <ThemedText type="subtitle">Current Location: {data.location.name}, {data.location.region}</ThemedText>
+                <View>
+                  {inspection === 'Red' && (
+                      <View style={styles.red}>
+                        <Text style={styles.font}>Do Not Inspect</Text>
+                      </View>
+                  )}
+                  {inspection === 'Yellow' && (
+                      <View style={styles.yellow}>
+                        <Text style={styles.font}>Inspection Risky</Text>
+                      </View>
+                  )}
+                  {inspection === 'Green' && (
+                      <View style={styles.green}>
+                        <Text style={styles.font}>Safe to Inspect</Text>
+                      </View>
+                  )}
+                </View>
+                <ThemedText type="defaultSemiBold">{data.current.condition.text}</ThemedText>
+                <Image style={styles.icon} source={{ uri: 'https:' + data.current.condition.icon}} />
+                <ThemedText type="defaultSemiBold">{data.current.precip_in} inches of rain per hour</ThemedText>
+                <ThemedText type="defaultSemiBold">
+                  {data.current.temp_f}°F outside / {tempResult}
+                </ThemedText>
+                <ThemedText type="defaultSemiBold">
+                  {data.current.wind_mph} MPH Wind Speed / {windResult}
+                </ThemedText>
+              </ThemedView>
+            </>
+        ) : null}
+      </ParallaxScrollView>
   );
 }
 
@@ -185,9 +192,9 @@ const styles = StyleSheet.create({
     height: 150,
     backgroundColor: 'red',
     padding: 10,
-    display:'flex',
+    display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   yellow: {
     borderRadius: 100,
@@ -195,9 +202,9 @@ const styles = StyleSheet.create({
     height: 150,
     backgroundColor: 'yellow',
     padding: 10,
-    display:'flex',
+    display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   green: {
     borderRadius: 100,
@@ -205,9 +212,9 @@ const styles = StyleSheet.create({
     height: 150,
     backgroundColor: 'green',
     padding: 10,
-    display:'flex',
+    display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   reactLogo: {
     height: 250,
@@ -216,27 +223,27 @@ const styles = StyleSheet.create({
     left: 0,
   },
   font: {
-fontWeight: 900
+    fontWeight: '900',
   },
   icon: {
     height: 40,
     width: 40,
-    position: 'relative'
+    position: 'relative',
   },
   inputDark: {
     color: '#ffffff',
     borderWidth: 3,
     borderColor: '#ffffff',
-    paddingHorizontal:10,
-    paddingVertical:5,
-    backgroundColor: '#333333'
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: '#333333',
   },
   inputLight: {
     color: '#000',
     borderWidth: 3,
     borderColor: '#eee',
-    paddingHorizontal:10,
-    paddingVertical:5,
-    backgroundColor: '#ffffff'
-  }
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: '#ffffff',
+  },
 });

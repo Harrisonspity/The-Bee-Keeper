@@ -10,16 +10,29 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f2d469"
     },
+    "owner": "spitnale",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spitnale.thebeekeeper",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses location to fetch local weather data for bee keeping conditions.",
+        "UIBackgroundModes": [
+          "fetch"
+        ]
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#f2d469"
+      },
+      "package": "com.spitnale.thebeekeeper"
     },
     "web": {
       "bundler": "metro",
@@ -30,7 +43,17 @@
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
+    "newArchEnabled": true,
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "57410099-dc7a-400c-831c-4f62659ff807"
+      }
     }
   }
 }
